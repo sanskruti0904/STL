@@ -1,0 +1,46 @@
+#include <iostream>
+#include <fstream>
+#include <map>
+#include <string>
+#include <sstream>
+#include <cctype>
+using namespace std;
+
+int main()
+{
+    ifstream file("some_file.txt");
+    if (!file.is_open())
+    {
+        cout << "Can't Open File" << endl;
+    }
+    map<string, int> occurrence;
+
+    string line;
+    while (getline(file, line))
+    {
+        stringstream ss(line);
+        string word;
+        while (ss >> word)
+        {
+            
+
+            
+            for (char &c : word)
+            {
+                c = tolower(c);
+            }
+            ++occurrence[word]; 
+        }
+    }
+
+    file.close();
+
+    // display function
+    cout << "Word Counts:" << endl;
+    for (auto &i : occurrence)
+    {
+        cout << i.first << " -> " << i.second << endl;
+    }
+
+    return 0;
+}
